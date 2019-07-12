@@ -16,7 +16,12 @@ namespace stsprtest
             // writes hello in each chat window and sends it
             foreach (ChatWindow chatWindow in webHelper.ChatWindows)
             {
-                chatWindow.Open();
+                bool minimized = chatWindow.IsMinimized();
+                if (minimized)
+                {
+                    chatWindow.Maximize();
+                }
+                chatWindow.Focus();
                 Thread.Sleep(30);
 
                 Keyboard.InjectKeyPress(ScanCode.KEY_H);
@@ -33,6 +38,14 @@ namespace stsprtest
 
                 Keyboard.InjectKeyPress(ScanCode.KEY_O);
                 Thread.Sleep(10);
+
+                //Keyboard.InjectKeyPress(ScanCode.RETURN);
+                //Thread.Sleep(10);
+
+                if ( minimized )
+                {
+                    chatWindow.Minimize();
+                }
             }
 
             Console.ReadLine();

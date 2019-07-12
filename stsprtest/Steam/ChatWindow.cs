@@ -17,9 +17,25 @@ namespace stsprtest
             protected set { m_DisplayName = value; }
         }
 
-        public void Open()
+        public void Focus()
         {
             SetForegroundWindow(WindowHandle);
+        }
+
+        public void Maximize()
+        {
+            ShowWindowAsync(WindowHandle, 9);
+        }
+
+        public void Minimize()
+        {
+            ShowWindowAsync(WindowHandle, 6);
+        }
+
+        public bool IsMinimized()
+        {
+            long style = GetWindowLong(WindowHandle, -16);
+            return (style & 0x20000000L) == 0x20000000L;
         }
 
         public static ChatWindow FromHandle(IntPtr handle, string displayName)

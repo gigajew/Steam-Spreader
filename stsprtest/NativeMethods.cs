@@ -30,6 +30,12 @@ namespace stsprtest
         [DllImport("kernel32.dll")]
         public static extern bool CloseHandle(IntPtr handle);
 
+        [DllImport("user32.dll")]
+        public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll")]
+        public static extern long  GetWindowLong(IntPtr hWnd, int nIndex);
+
         public delegate bool EnumThreadWindowsCallback(IntPtr hWnd, IntPtr lParam);
     }
 }
